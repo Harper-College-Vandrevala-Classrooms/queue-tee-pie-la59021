@@ -1,39 +1,39 @@
 #include "Cuties.hpp"
 #include "QueueTeePies.hpp"
 #include <cassert>
+#include <array>
 #include <iostream>
 using namespace std;
 
+#define SUCCESS "[\033[32mOK\033[0m] "
+
 int main() {
-    // Create a bunch of objects that conform to the Cutie interface
     Puppy puppy;
     Kitten kitty;
     PygmyMarmoset marmoset;
+    GoldenBrushtailPossum possum;
 
-    // Create a queue data structure
     QueueTeePies queue;
 
-    // The size of the queue should equal zero since there are no objects in it
     assert(queue.size() == 0);
-
-    // Add the cuties to the queue
     queue.enqueue(&puppy);
+    assert(queue.size() == 1);
     queue.enqueue(&kitty);
+    assert(queue.size() == 2);
     queue.enqueue(&marmoset);
-
-    // The size of the queue should equal three since there are three objects in it
     assert(queue.size() == 3);
+    queue.enqueue(&possum);
+    assert(queue.size() == 4);
+    cout << SUCCESS << ".enqueue() passed all tests." << endl;
+    cout << SUCCESS << ".size() passed all tests." << endl;
 
-    // The first dequeue should return the puppy
     assert(queue.dequeue() == &puppy);
-
-    // The second dequeue should return the kitty
     assert(queue.dequeue() == &kitty);
-
-    // The first dequeue should return the pygmy marmoset
     assert(queue.dequeue() == &marmoset);
+    assert(queue.dequeue() == &possum);
+    cout << SUCCESS << ".dequeue() passed all tests." << endl;
 
-    cout << "the example works" << endl;
+    cout << SUCCESS << "QueueTeePies class passed all tests." << endl;
     
     return 0;
 }
